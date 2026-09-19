@@ -1,0 +1,20 @@
+{
+  "name": "hanabi-online",
+  "private": true,
+  "version": "1.0.0",
+  "workspaces": ["apps/*", "packages/*"],
+  "scripts": {
+    "predev": "npm run build -w @hanabi/game-engine && npm run build -w @hanabi/protocol",
+    "dev": "concurrently -n server,web -c magenta,cyan \"npm run dev -w @hanabi/server\" \"npm run dev -w @hanabi/web\"",
+    "build": "npm run build -w @hanabi/game-engine && npm run build -w @hanabi/protocol && npm run build -w @hanabi/server && npm run build -w @hanabi/web",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "check": "npm run build -w @hanabi/game-engine && npm run build -w @hanabi/protocol && npm run typecheck --workspaces --if-present && npm test"
+  },
+  "devDependencies": {
+    "@types/node": "^24.0.0",
+    "concurrently": "^9.2.1",
+    "typescript": "^5.9.2",
+    "vitest": "^3.2.4"
+  }
+}
